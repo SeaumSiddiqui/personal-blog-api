@@ -59,16 +59,15 @@ public class BlogPostService {
     }
 
     public void deleteBlogPost(String id) {
-        try {
-            BlogPost blogPost = blogPostRepository.findById(id)
-                    .orElseThrow(()-> new ResourceNotFoundException("Blog Post: {%s} not found".formatted(id)));
+        BlogPost blogPost = getBlogPostById(id);
 
+        try {
             // delete images related to the blogpost form OCI bucket
             if (blogPost.getImageURLs() != null) {
-               for (String imageURL: blogPost.getImageURLs()) {
-                   objectStorageService.deleteFileObject(imageURL);
-               }
-           }
+                for (String imageURL: blogPost.getImageURLs()) {
+                    objectStorageService.deleteFileObject(imageURL);
+                }
+            }
 
             // delete markdown file
             if (blogPost.getMarkdownFileURL() != null) {

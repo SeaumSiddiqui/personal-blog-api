@@ -24,7 +24,7 @@ public class BlogPostController {
                                                          @RequestParam(defaultValue = "createdAt") String sortField,
                                                          @RequestParam(defaultValue = "DESC") String sortDirection,
                                                          @RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "5") int size) {
+                                                         @RequestParam(defaultValue = "6") int size) {
 
         return ResponseEntity.ok(blogPostService
                 .getAllBlogPost(title, author, createdStartDate, createdEndDate, sortField, sortDirection, page, size));
